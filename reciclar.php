@@ -73,46 +73,70 @@ if (!isset($_SESSION["usuario_logado"])) {
             <button type="submit" name="vercoletas" class="btn btn-info">Ver Coletas</button>
         </form>
 
-        <?php
-        $nome = $_SESSION["usuario_logado"]["nome"];
-        $cep = isset($_POST["cep"]) ? $_POST["cep"] : 0;
-        $rua = isset($_POST["rua"]) ? $_POST["rua"] : 0;
-        $numero = isset($_POST["num"]) ? $_POST["num"] : 0;
-        $bairro = isset($_POST["bairro"]) ? $_POST["bairro"] : 0;
-        $cidade = isset($_POST["cidade"]) ? $_POST["cidade"] : 0;
-        $uf = isset($_POST["uf"]) ? $_POST["uf"] : 0;
-        $option = isset($_POST["tipo"]) ? $_POST["tipo"] : 0;
-        $descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : 0;
+    </div>
 
-        function get_post_action($name) {
-            $params = func_get_args();
+    <?php
+    $nome = $_SESSION["usuario_logado"]["nome"];
+    $cep = isset($_POST["cep"]) ? $_POST["cep"] : 0;
+    $rua = isset($_POST["rua"]) ? $_POST["rua"] : 0;
+    $numero = isset($_POST["num"]) ? $_POST["num"] : 0;
+    $bairro = isset($_POST["bairro"]) ? $_POST["bairro"] : 0;
+    $cidade = isset($_POST["cidade"]) ? $_POST["cidade"] : 0;
+    $uf = isset($_POST["uf"]) ? $_POST["uf"] : 0;
+    $option = isset($_POST["tipo"]) ? $_POST["tipo"] : 0;
+    $descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : 0;
 
-            foreach ($params as $name) {
-                if (isset($_POST[$name])) {
-                    return $name;
-                }
+    function get_post_action($name) {
+        $params = func_get_args();
+
+        foreach ($params as $name) {
+            if (isset($_POST[$name])) {
+                return $name;
             }
         }
+    }
 
-        switch (get_post_action('enviar', 'vercoletas')) {
-            case 'enviar':
-                $con = @mysqli_connect("localhost", "root", "", "bd_aula") or die("Erro ao conectar no banco: " . mysqli_connect_error());
+    $con = @mysqli_connect("localhost", "root", "", "bd_aula") or die("Erro ao conectar no banco: " . mysqli_connect_error());
 
-                // Cria o SQL
-                $sql = "INSERT INTO `tb_coleta`(`nome`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `uf`, `tipo`, `descricao`) VALUES ('" . $nome . "','" . $cep . "','" . $rua . "'," . $numero . ",'" . $bairro . "','" . $cidade . "','" . $uf . "','" . $option . "','" . $descricao . "')";
-                \var_dump($sql);
+    switch (get_post_action('enviar', 'vercoletas')) {
+        case 'enviar':
 
-                // Executa o SQL
-                mysqli_query($con, $sql) or die("Erro de SQL: " . mysqli_error($con)); //save article and keep editing
+            // Cria o SQL
+            $sql = "INSERT INTO `tb_coleta`(`nome`, `cep`, `rua`, `numero`, `bairro`, `cidade`, `uf`, `tipo`, `descricao`) VALUES ('" . $nome . "','" . $cep . "','" . $rua . "'," . $numero . ",'" . $bairro . "','" . $cidade . "','" . $uf . "','" . $option . "','" . $descricao . "')";
+            \var_dump($sql);
 
-                echo("<script>alert('Cadastrado com sucesso');</script>");
+            // Executa o SQL
+            mysqli_query($con, $sql) or die("Erro de SQL: " . mysqli_error($con)); //save article and keep editing
 
-                break;
+            echo("<script>alert('Cadastrado com sucesso');</script>");
 
-            case 'vercoletas':
-                //save article and redirect
-                break;
-        }
-        ?>
-    </div>
+            break;
+
+        case 'vercoletas':
+
+
+            echo("<div class='col-md-6'><table class='table'  style='color: #000' border = '1'>
+                    <tr>
+                    <th>Tipo</th>
+                    <th>Descricao</th>                    
+                    </tr>");
+
+            $sql = "SELECT * FROM tb_coleta WHERE nome='$nome'";
+            $rs = mysqli_query($con, $sql) or die(mysqli_errno($con));
+            $lin = mysqli_fetch_assoc($rs);
+            $item = array($lin);
+
+            for ($i = 0; $i < count($item); $i++) {
+
+                if ($lin["nome"] == $_SESSION["usuario_logado"]["nome"]) {
+                    // IMPREME OS DADOS DO PRODUTO
+                    echo("<tr>");
+                    echo("<td>" . $lin["tipo"] . "</td>");
+                    echo("<td>" . $lin["descricao"] . "</td>");
+                    echo("</tr></div>");
+                }
+            }
+            break;
+    }
+    ?>
 </div>
