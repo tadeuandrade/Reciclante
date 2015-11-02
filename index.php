@@ -21,7 +21,7 @@ if (isset($_SESSION["erro"])) {
                         <div class="row">
                             <div class="col-md-6 text-left">
                                 <h1 class="text-info text-center">Saiba Mais sobre a reciclagem</h1>
-                                <p class="text-info ">Faça sua parte e aprenda reciclando de forma interativa,  <a href="./informação.php">clique aqui</a></p>
+                                <p class="text-info ">Faça sua parte e aprenda reciclando,  <a href="./informação.php">clique aqui</a></p>
                             </div>
                         </div>
                     </div>

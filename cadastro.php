@@ -21,7 +21,7 @@ if (isset($_SESSION["erro_login"])) {
                 </div>
             </div>
             <div class="col-md-6">
-                <form role="form" action="./cadastro.php" method="post">
+                <form  role="form" action="./cadastro.php" method="post">
                     <div class="form-group">
                         <label class="control-label cadastro" for="exampleInputEmail1">Nome</label>
                         <input class="form-control" id="exampleInputEmail1" name="nome" placeholder="Digite seu usuário" type="text">
@@ -36,7 +36,7 @@ if (isset($_SESSION["erro_login"])) {
                     </div>
                     <div class="form-group">
                         <label class="control-label cadastro">CEP</label>
-                        <input class="form-control" id="cep" name="cep" type="text" maxlength="9" placeholder="Informe o CEP"  />
+                        <input class="form-control" id="cep" name="cep" type="text" maxlength="9"  placeholder="Informe o CEP"  />
                     </div>
                     <div class="form-group">
                         <label class="control-label cadastro">Rua</label>
