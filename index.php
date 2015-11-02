@@ -15,7 +15,7 @@ if (isset($_SESSION["erro"])) {
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <img src="./img/logo.png" class="center-block img-responsive img-thumbnail">
+                <img src="./img/logo.png" class="center-block img-responsive">
                 <div class="section">
                     <div class="container">
                         <div class="row">
