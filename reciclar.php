@@ -85,11 +85,13 @@ if (!isset($_SESSION["usuario_logado"])) {
             echo("<div class='col-md-6'><table class='table'  style='color: #000' border = '1'>
                     <tr>
                     <th>Tipo</th>
-                    <th>Descricao</th>                    
+                    <th>Descricao</th> 
+                    <th>Data solicitada</th>
+                    <th>Data de coleta</th>
                     </tr>");
 
             $sql = "SELECT * FROM tb_coleta WHERE nome='" . $_SESSION["usuario_logado"]["nome"] . "'";
-     
+
             $rs = mysqli_query($con, $sql) or die(mysqli_errno($con));
 
 
@@ -100,6 +102,8 @@ if (!isset($_SESSION["usuario_logado"])) {
                     echo("<tr>");
                     echo("<td>" . $lin["tipo"] . "</td>");
                     echo("<td>" . $lin["descricao"] . "</td>");
+                    echo("<td>" . $lin["data_solicitacao"] . "</td>");
+                    echo("<td>" . $lin["data_coleta"] . "</td>");
                     echo("</tr></div>");
                 }
             }
