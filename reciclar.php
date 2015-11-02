@@ -47,7 +47,7 @@ if (!isset($_SESSION["usuario_logado"])) {
 
             <div class="form-group">
                 <label class="control-label cadastro">CEP</label>
-                <input class="form-control" id="cep" name="cep" type="text" maxlength="9" placeholder="Informe o CEP" />
+                <input class="form-control" id="cep" name="cep" type="text" maxlength="9" placeholder="Informe o CEP" required="Entre com cep" />
             </div>
             <div class="form-group">
                 <label class="control-label cadastro">Rua</label>
@@ -69,7 +69,9 @@ if (!isset($_SESSION["usuario_logado"])) {
                 <label class="control-label cadastro">UF</label>
                 <input class="form-control" id="uf" name="uf" type="text" placeholder="Informe a UF" />
             </div>
-            <input type="submit" name="enviar" class="btn btn-info">Enviar</input>
+            <button type="submit" name="enviar" class="btn btn-info">Enviar</button>
+        </form>
+        <form action="reciclar.php" method="post">
             <button type="submit" name="vercoletas" class="btn btn-info">Ver Coletas</button>
         </form>
 
