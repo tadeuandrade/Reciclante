@@ -65,11 +65,11 @@ if (!isset($_SESSION["usuario_logado"])) {
 
     $con = @mysqli_connect("localhost", "root", "", "bd_aula") or die("Erro ao conectar no banco: " . mysqli_connect_error());
 
-    switch (get_post_action('enviar', 'vercoletas')) {
+    switch (get_post_action('enviar', 'vercoletas', 'remover')) {
         case 'enviar':
 
             // Cria o SQL
-            $sql = "INSERT INTO `tb_coleta`(`nome`,`tipo`, `descricao`) VALUES ('" . $_SESSION["usuario_logado"]["nome"] . "','" . $option . "','" . $descricao . "')";
+            $sql = "INSERT INTO `tb_coleta`(`nome`,`tipo`, `descricao`,`data_solicitacao`) VALUES ('" . $_SESSION["usuario_logado"]["nome"] . "','" . $option . "','" . $descricao . "',NOW())";
             \var_dump($sql);
 
             // Executa o SQL
@@ -82,7 +82,7 @@ if (!isset($_SESSION["usuario_logado"])) {
         case 'vercoletas':
 
 
-            echo("<div class='col-md-6'><table class='table'  style='color: #000' border = '1'>
+            echo("<div class='col-md-6'><form action='reciclar.php' method='post'><table class='table'  style='color: #000' border = '1'>
                     <tr>
                     <th>Tipo</th>
                     <th>Descricao</th> 
@@ -104,10 +104,47 @@ if (!isset($_SESSION["usuario_logado"])) {
                     echo("<td>" . $lin["descricao"] . "</td>");
                     echo("<td>" . $lin["data_solicitacao"] . "</td>");
                     echo("<td>" . $lin["data_coleta"] . "</td>");
-                    echo("</tr></div>");
+                    echo("<td><button type='submit' name='remover' class='btn btn-info'>remover</button></td>");
+                    echo("</tr>");
                 }
             }
+            echo("</table></form></div>");
+            break;
 
+        case 'remover':
+            $remover = isset($_POST["remover"]) ? $_POST["remover"] : 0;
+
+            $sqlremover = "DELETE FROM tb_coleta WHERE descricao='" . $remover . "'";
+
+            mysqli_query($con, $sqlremover) or die(mysqli_errno($con));
+
+            echo("<div class='col-md-6'><form action='reciclar.php' method='post'><table class='table'  style='color: #000' border = '1'>
+                    <tr>
+                    <th>Tipo</th>
+                    <th>Descricao</th> 
+                    <th>Data solicitada</th>
+                    <th>Data de coleta</th>
+                    </tr>");
+
+            $sql = "SELECT * FROM tb_coleta WHERE nome='" . $_SESSION["usuario_logado"]["nome"] . "'";
+
+            $rs = mysqli_query($con, $sql) or die(mysqli_errno($con));
+
+
+            while ($lin = mysqli_fetch_array($rs)) {
+
+                if ($lin["nome"] == $_SESSION["usuario_logado"]["nome"]) {
+                    // IMPREME OS DADOS DO PRODUTO
+                    echo("<tr>");
+                    echo("<td>" . $lin["tipo"] . "</td>");
+                    echo("<td>" . $lin["descricao"] . "</td>");
+                    echo("<td>" . $lin["data_solicitacao"] . "</td>");
+                    echo("<td>" . $lin["data_coleta"] . "</td>");
+                    echo("<td><button type='submit' name='remover' value='" . $lin["descricao"] . "' class='btn btn-info'>remover</button></td>");
+                    echo("</tr>");
+                }
+            }
+            echo("</table></form></div>");
             break;
     }
     ?>
