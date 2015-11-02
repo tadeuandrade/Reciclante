@@ -7,7 +7,10 @@ if (isset($_SESSION["erro"])) {
     echo("<script>alert('" . $_SESSION["erro"] . "');</script>");
     unset($_SESSION["erro"]);
 }
+
+
 ?>
+
 <div class="section">
     <div class="container">
         <div class="row">
@@ -34,8 +37,10 @@ if (isset($_SESSION["erro"])) {
                         <label class="control-label cadastro" for="exampleInputEmail1">Senha</label>
                         <input class="form-control" id="exampleInputPassword1" name="senha" placeholder="Digite sua Senha" type="password">
                     </div>
-                    <button type="submit" class="btn btn-info">Enviar</button>
+                    <button type="submit" class="btn btn-info">Enviar</button>     
+                    <a href="cadastro.php"><input type="button" class="btn btn-info" value="Cadastrar"/></a>
                 </form>
+
             </div>
         </div>
     </div>

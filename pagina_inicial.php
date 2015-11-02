@@ -4,6 +4,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <title>CEP</title>
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+        <script src="busca_endereco/js/gmaps.js" type="text/javascript"></script>
+        <script src="busca_endereco/js/cep_clean.js" type="text/javascript"></script>
+        <script>
+            $(function () {
+                wscep({'auto': true, 'map': 'map1'})
+            })
+        </script>
+
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="index.css" rel="stylesheet" type="text/css">
     </head>
@@ -39,11 +51,11 @@
                             echo ("<li>
                             <a href='index.php'>LOGIN<br></a>
                         </li>");
-                            
-                            
                         }
                         ?>
                     </ul>
                 </div>
             </div>
         </div>
+    </body>
+</html>
