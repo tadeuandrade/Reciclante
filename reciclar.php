@@ -1,16 +1,10 @@
 <?php
 include "./pagina_inicial.php";
 
+//se ja acessou anteriormente na mesma sessao não aparece bem vindo
 $validabemvindo = isset($_SESSION["ja_acessou"]) ? $_SESSION["ja_acessou"] : 0;
-// Verifica se o usuáro está logado
-if (!isset($_SESSION["usuario_logado"])) {
 
-// Cria uma mensagem de erro
-    $_SESSION["erro"] = "Você precisa estar logado para acessar essa funcionalidade!";
-
-// Redireciona o usuário para o INDEX
-    header("location:index.php");
-} else if ($validabemvindo != $_SESSION["usuario_logado"]) {
+if ($validabemvindo != $_SESSION["usuario_logado"]) {
     echo ("<script>alert('Bem Vindo " . $_SESSION["usuario_logado"]["nome"] . "');</script>");
     $_SESSION["ja_acessou"] = $_SESSION["usuario_logado"];
 }
@@ -41,18 +35,17 @@ if (!isset($_SESSION["usuario_logado"])) {
                 </div>
                 <textarea style="color: #000" name="descricao" type="text" rows="4" cols="50" placeholder="Descrever material"></textarea>
                 <br /><button type="submit" name="enviar" class="btn btn-info">Cadastrar coleta</button>
-            </form>
-            <form action="reciclar.php" method="post">
                 <button type="submit" name="vercoletas" class="btn btn-info">Ver Coletas</button>
             </form>
-
         </div>
     </div>
 
     <?php
+    //pega o o valor da opção e descrição
     $option = isset($_POST["tipo"]) ? $_POST["tipo"] : 0;
     $descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : 0;
 
+    //função para pega o valor do submit
     function get_post_action($name) {
         $params = func_get_args();
 
@@ -65,6 +58,7 @@ if (!isset($_SESSION["usuario_logado"])) {
 
     $con = @mysqli_connect("localhost", "root", "", "bd_aula") or die("Erro ao conectar no banco: " . mysqli_connect_error());
 
+    //valida qual submit foi acessado
     switch (get_post_action('enviar', 'vercoletas', 'remover')) {
         case 'enviar':
 

@@ -1,10 +1,5 @@
 <?php
 include './pagina_inicial.php';
-
-if (isset($_SESSION["erro_login"])) {
-    echo("<script>alert('Login já existe');</script>");
-    unset($_SESSION["erro_login"]);
-}
 ?>
 
 <div class="section">

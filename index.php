@@ -2,7 +2,7 @@
 <?php
 include "pagina_inicial.php";
 
-
+//se existir variavel de sessao erro apresenta na pagina
 if (isset($_SESSION["erro"])) {
     echo("<script>alert('" . $_SESSION["erro"] . "');</script>");
     unset($_SESSION["erro"]);
