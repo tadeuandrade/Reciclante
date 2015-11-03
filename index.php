@@ -7,8 +7,6 @@ if (isset($_SESSION["erro"])) {
     echo("<script>alert('" . $_SESSION["erro"] . "');</script>");
     unset($_SESSION["erro"]);
 }
-
-
 ?>
 
 <div class="section">
@@ -110,10 +108,8 @@ if (isset($_SESSION["erro"])) {
             <div class="col-sm-6 col-md-12">
                 <h4 class="text-center">Todos os Direitos Reservados a Grupo3</h4>
                 <div class="col-md-12 hidden-xs text-center">
-                    <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
-                    <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
                     <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
-                    <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+                    <a href="https://github.com/tadeuandrade/Reciclante"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
                 </div>
             </div>
         </div>

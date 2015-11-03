@@ -64,7 +64,7 @@ if ($validabemvindo != $_SESSION["usuario_logado"]) {
 
             // Cria o SQL
             $sql = "INSERT INTO `tb_coleta`(`nome`,`tipo`, `descricao`,`data_solicitacao`) VALUES ('" . $_SESSION["usuario_logado"]["nome"] . "','" . $option . "','" . $descricao . "',NOW())";
-            \var_dump($sql);
+//            \var_dump($sql);
 
             // Executa o SQL
             mysqli_query($con, $sql) or die("Erro de SQL: " . mysqli_error($con)); //save article and keep editing
@@ -87,22 +87,30 @@ if ($validabemvindo != $_SESSION["usuario_logado"]) {
             $sql = "SELECT * FROM tb_coleta WHERE nome='" . $_SESSION["usuario_logado"]["nome"] . "'";
 
             $rs = mysqli_query($con, $sql) or die(mysqli_errno($con));
+//
+//            $lina = mysql_num_rows($rs);
+//            var_dump($lina);
+//
+//            if ($lina != null) {
 
 
-            while ($lin = mysqli_fetch_array($rs)) {
+                while ($lin = mysqli_fetch_array($rs)) {
 
-                if ($lin["nome"] == $_SESSION["usuario_logado"]["nome"]) {
-                    // IMPREME OS DADOS DO PRODUTO
-                    echo("<tr>");
-                    echo("<td>" . $lin["tipo"] . "</td>");
-                    echo("<td>" . $lin["descricao"] . "</td>");
-                    echo("<td>" . $lin["data_solicitacao"] . "</td>");
-                    echo("<td>" . $lin["data_coleta"] . "</td>");
-                    echo("<td><button type='submit' name='remover' class='btn btn-info'>remover</button></td>");
-                    echo("</tr>");
+                    if ($lin["nome"] == $_SESSION["usuario_logado"]["nome"]) {
+                        // IMPREME OS DADOS DO PRODUTO
+                        echo("<tr>");
+                        echo("<td>" . $lin["tipo"] . "</td>");
+                        echo("<td>" . $lin["descricao"] . "</td>");
+                        echo("<td>" . $lin["data_solicitacao"] . "</td>");
+                        echo("<td>" . $lin["data_coleta"] . "</td>");
+                        echo("<td><button type='submit' name='remover' class='btn btn-info'>remover</button></td>");
+                        echo("</tr>");
+                    }
                 }
-            }
-            echo("</table></form></div>");
+                echo("</table></form></div>");
+//            } else {
+//                echo("<p class='text-info '>Não a registro de solicitação de coleta</p>");
+//            }
             break;
 
         case 'remover':
