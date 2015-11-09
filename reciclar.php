@@ -56,7 +56,7 @@ if ($validabemvindo != $_SESSION["usuario_logado"]) {
         }
     }
 
-    $con = @mysqli_connect("localhost", "root", "", "bd_aula") or die("Erro ao conectar no banco: " . mysqli_connect_error());
+    $con = @mysqli_connect("localhost", "root", "", "projeto") or die("Erro ao conectar no banco: " . mysqli_connect_error());
 
     //valida qual submit foi acessado
     switch (get_post_action('enviar', 'vercoletas', 'remover')) {

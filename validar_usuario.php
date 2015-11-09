@@ -3,7 +3,7 @@ $login = $_POST["login"];
 $senha = $_POST["senha"];
 
 // Conecta com o servidor e seleciona o banco
-$con = @mysqli_connect("localhost", "root", "", "bd_aula") or die("Erro ao conectar no banco: " . mysqli_connect_error());
+$con = @mysqli_connect("localhost", "root", "", "projeto") or die("Erro ao conectar no banco: " . mysqli_connect_error());
 
 // Cria o SQL
 $sql = "SELECT * FROM tb_usuarios WHERE login='$login' AND senha='$senha'";
